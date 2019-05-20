@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * Author: brianfroschauer
@@ -12,22 +11,22 @@ import java.util.Set;
  */
 @Data
 @NoArgsConstructor
-@Entity(name = "cart")
-public class Cart {
+@Entity(name = "product")
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
-    private Set<CartItem> items;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    public void addItem(CartItem item) {
-        items.add(item);
-    }
+    @Column(name = "price", nullable = false)
+    private Float price;
 
-    public void removeItem(CartItem item) {
-        items.remove(item);
+    public Product(String name, Float price) {
+        this.name = name;
+        this.price = price;
     }
 }
