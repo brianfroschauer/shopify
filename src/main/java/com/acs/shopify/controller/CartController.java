@@ -2,10 +2,10 @@ package com.acs.shopify.controller;
 
 import com.acs.shopify.dto.cart.ResponseCart;
 import com.acs.shopify.dto.cartItem.ResponseCartItem;
-import com.acs.shopify.dto.product.RequestProduct;
+import com.acs.shopify.dto.catalogItem.RequestCatalogItem;
 import com.acs.shopify.dto.product.ResponseProduct;
 import com.acs.shopify.model.Cart;
-import com.acs.shopify.model.Product;
+import com.acs.shopify.model.CatalogItem;
 import com.acs.shopify.service.CartService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -54,25 +54,15 @@ public class CartController {
         return ResponseEntity.ok(all);
     }
 
-    @PostMapping
+    @PostMapping("/{cartId}")
     public ResponseEntity<ResponseProduct> addToCart(
-            @RequestBody @Valid RequestProduct requestProduct) {
+            @PathVariable Long cartId,
+            @RequestBody @Valid RequestCatalogItem requestCatalogItem) {
 
-        final Product product = mapper.map(requestProduct, Product.class);
+        final CatalogItem catalogItem = mapper
+                .map(requestCatalogItem, CatalogItem.class);
 
-        cartService.addToCart(product);
-
-        return ResponseEntity.noContent().build();
-    }
-
-    @PostMapping
-    public ResponseEntity<Cart> addToCart(
-            @RequestBody @Valid RequestProduct requestProduct,
-            @RequestParam(value = "amount") Integer amount) {
-
-        final Product product = mapper.map(requestProduct, Product.class);
-
-        cartService.addToCart(product, amount);
+        cartService.addToCart(cartId, catalogItem);
 
         return ResponseEntity.noContent().build();
     }
@@ -83,18 +73,6 @@ public class CartController {
             @PathVariable Long itemId) {
 
         cartService.remove(cartId, itemId);
-
-        return ResponseEntity.noContent().build();
-
-    }
-
-    @DeleteMapping("/{cartId}/items/{itemId}")
-    public ResponseEntity remove(
-            @PathVariable Long cartId,
-            @PathVariable Long itemId,
-            @RequestParam(value = "amount") Integer amount) {
-
-        cartService.remove(cartId, itemId, amount);
 
         return ResponseEntity.noContent().build();
     }
