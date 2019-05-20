@@ -2,7 +2,7 @@ package com.acs.shopify.service;
 
 import com.acs.shopify.model.Cart;
 import com.acs.shopify.model.CartItem;
-import com.acs.shopify.model.Product;
+import com.acs.shopify.model.CatalogItem;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,17 +33,10 @@ public interface CartService {
     /**
      * Add product to cart.
      *
-     * @param product to be added to cart.
+     * @param cartId id of the cart.
+     * @param catalogItem to be added to cart.
      */
-    void addToCart(Product product);
-
-    /**
-     * Add product to cart with an amount.
-     *
-     * @param product to be added to cart.
-     * @param amount of the product.
-     */
-    void addToCart(Product product, Integer amount);
+    void addToCart(Long cartId, CatalogItem catalogItem);
 
     /**
      * Remove item from cart.
@@ -52,15 +45,6 @@ public interface CartService {
      * @param itemId id of the item to be removed.
      */
     void remove(Long cartId, Long itemId);
-
-    /**
-     * Remove {@param amount} items from cart.
-     *
-     * @param cartId id of the cart.
-     * @param itemId id of the item to be removed.
-     * @param amount of items to be removed.
-     */
-    void remove(Long cartId, Long itemId, Integer amount);
 
     /**
      * Remove all items of a cart with provided id.
