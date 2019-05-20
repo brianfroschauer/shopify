@@ -22,11 +22,11 @@ public class Product {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "price", nullable = false)
-    private Float price;
+    @Column(name = "description", nullable = false)
+    private String description;
 
-    public Product(String name, Float price) {
+    public Product(String name, String description) {
         this.name = name;
-        this.price = price;
+        this.description = description;
     }
 }

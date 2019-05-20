@@ -20,13 +20,13 @@ public class CartItem {
     private Long id;
 
     @ManyToOne
-    private Product product;
+    private CatalogItem catalogItem;
 
     @Column(name = "amount", nullable = false)
     private Integer amount;
 
-    public CartItem(Product product, Integer amount) {
-        this.product = product;
+    public CartItem(CatalogItem catalogItem, Integer amount) {
+        this.catalogItem = catalogItem;
         this.amount = amount;
     }
 }
