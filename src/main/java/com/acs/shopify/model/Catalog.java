@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -17,22 +19,26 @@ public class Catalog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "total_items", nullable = false)
-    private Integer totalItems = 0;
+    @Column(name = "date_created")
+    private LocalDate dateCreated = LocalDate.now();
 
-    @OneToMany(cascade = CascadeType.REMOVE)
-    private Set<CatalogItem> items;
+    @Column(name = "date_updated")
+    private LocalDate dateUpdated = LocalDate.now();
 
-    public void addItem(CatalogItem item) {
-        items.add(item);
-        totalItems += 1;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "catalog_id")
+    private Set<CatalogItem> items = new HashSet<>();
+
+    public void addItem(CatalogItem catalogItem) {
+        items.add(catalogItem);
+        dateUpdated = LocalDate.now();
     }
 
-    public void removeItem(CatalogItem item) {
-        items.remove(item);
-        totalItems -= 1;
+    public void removeItem(CatalogItem catalogItem) {
+        items.remove(catalogItem);
+        dateUpdated = LocalDate.now();
     }
 }

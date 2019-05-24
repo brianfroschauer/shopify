@@ -16,17 +16,22 @@ public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "catalog_item_id")
     private CatalogItem catalogItem;
 
-    @Column(name = "amount", nullable = false)
+    @Column(name = "amount")
     private Integer amount;
 
-    public CartItem(CatalogItem catalogItem, Integer amount) {
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+    public CartItem(CatalogItem catalogItem) {
         this.catalogItem = catalogItem;
-        this.amount = amount;
+        this.amount = 1;
     }
 }

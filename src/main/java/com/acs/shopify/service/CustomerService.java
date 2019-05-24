@@ -15,7 +15,7 @@ public interface CustomerService {
     /**
      * Find the customer with the provided id.
      *
-     * @param id of the user to be found.
+     * @param id of the customer to be found.
      * @return the customer with the provided id.
      */
     Customer findOne(Long id);
@@ -30,10 +30,10 @@ public interface CustomerService {
     /**
      * Save the customer provided.
      *
-     * The user's password is encrypted before persisting.
+     * The customer's password is encrypted before persisting.
      *
      * @param customer to be saved.
-     * @return the saved user.
+     * @return the saved customer.
      */
     Customer save(Customer customer);
 

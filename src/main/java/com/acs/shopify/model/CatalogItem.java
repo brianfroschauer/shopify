@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Author: brianfroschauer
@@ -16,10 +17,10 @@ public class CatalogItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -29,5 +30,20 @@ public class CatalogItem {
     public CatalogItem(Product product, Float price) {
         this.product = product;
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CatalogItem that = (CatalogItem) o;
+        return Objects.equals(getId(), that.getId()) &&
+                Objects.equals(getProduct(), that.getProduct()) &&
+                Objects.equals(getPrice(), that.getPrice());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getProduct(), getPrice());
     }
 }

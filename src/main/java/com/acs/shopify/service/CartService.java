@@ -5,7 +5,7 @@ import com.acs.shopify.model.CartItem;
 import com.acs.shopify.model.CatalogItem;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Author: brianfroschauer
@@ -23,12 +23,20 @@ public interface CartService {
     Cart getCart(Long cartId);
 
     /**
+     * Get cart y customer with provided id.
+     *
+     * @param customerId id of the customer's cart.
+     * @return the cart.
+     */
+    Cart getCartByCustomer(Long customerId);
+
+    /**
      * Get all items from the cart with provided id.
      *
      * @param cartId id of the cart.
      * @return all items from the cart.
      */
-    List<CartItem> getItems(Long cartId);
+    Set<CartItem> getItems(Long cartId);
 
     /**
      * Add product to cart.
@@ -37,6 +45,14 @@ public interface CartService {
      * @param catalogItem to be added to cart.
      */
     void addToCart(Long cartId, CatalogItem catalogItem);
+
+    /**
+     * Save a new cart.
+     *
+     * @param cart to be saved.
+     * @return the created cart.
+     */
+    Cart save(Cart cart);
 
     /**
      * Remove item from cart.

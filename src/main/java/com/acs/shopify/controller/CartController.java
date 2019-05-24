@@ -2,7 +2,7 @@ package com.acs.shopify.controller;
 
 import com.acs.shopify.dto.cart.ResponseCart;
 import com.acs.shopify.dto.cartItem.ResponseCartItem;
-import com.acs.shopify.dto.catalogItem.RequestCatalogItem;
+import com.acs.shopify.dto.catalogItem.ResponseCatalogItem;
 import com.acs.shopify.dto.product.ResponseProduct;
 import com.acs.shopify.model.Cart;
 import com.acs.shopify.model.CatalogItem;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * Date: 2019-05-20
  */
 @RestController
-@RequestMapping("/cart")
+@RequestMapping("/carts")
 public class CartController {
 
     private final CartService cartService;
@@ -31,11 +31,11 @@ public class CartController {
         this.mapper = new ModelMapper();
     }
 
-    @GetMapping("/{cartId}")
-    public ResponseEntity<ResponseCart> getCart(
-            @PathVariable Long cartId) {
+    @GetMapping("/{customerId}")
+    public ResponseEntity<ResponseCart> getCartByCustomer(
+            @PathVariable Long customerId) {
 
-        final Cart cart = cartService.getCart(cartId);
+        final Cart cart = cartService.getCartByCustomer(customerId);
 
         final ResponseCart responseCart = mapper
                 .map(cart, ResponseCart.class);
@@ -48,7 +48,7 @@ public class CartController {
             @PathVariable Long cartId) {
 
         final List<ResponseCartItem> all = cartService.getItems(cartId).stream()
-                .map(customer -> mapper.map(customer, ResponseCartItem.class))
+                .map(cartItem -> mapper.map(cartItem, ResponseCartItem.class))
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(all);
@@ -57,10 +57,10 @@ public class CartController {
     @PostMapping("/{cartId}")
     public ResponseEntity<ResponseProduct> addToCart(
             @PathVariable Long cartId,
-            @RequestBody @Valid RequestCatalogItem requestCatalogItem) {
+            @RequestBody @Valid ResponseCatalogItem responseCatalogItem) {
 
         final CatalogItem catalogItem = mapper
-                .map(requestCatalogItem, CatalogItem.class);
+                .map(responseCatalogItem, CatalogItem.class);
 
         cartService.addToCart(cartId, catalogItem);
 
