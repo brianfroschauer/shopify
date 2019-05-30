@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  * Author: brianfroschauer
- * Date: 2019-05-20
+ * Date: 2019-05-24
  */
 @Data
 @NoArgsConstructor
@@ -20,7 +20,7 @@ public class CatalogItem {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -37,13 +37,11 @@ public class CatalogItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CatalogItem that = (CatalogItem) o;
-        return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getProduct(), that.getProduct()) &&
-                Objects.equals(getPrice(), that.getPrice());
+        return Objects.equals(getProduct(), that.getProduct());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getProduct(), getPrice());
+        return Objects.hash(getProduct());
     }
 }

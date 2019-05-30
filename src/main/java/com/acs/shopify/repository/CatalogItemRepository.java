@@ -1,12 +1,12 @@
 package com.acs.shopify.repository;
 
-import com.acs.shopify.model.Catalog;
+import com.acs.shopify.model.CatalogItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * Author: brianfroschauer
  * Date: 2019-05-24
  */
-public interface CatalogRepository extends JpaRepository<Catalog, Long> {
+public interface CatalogItemRepository extends JpaRepository<CatalogItem, Long> {
 
 }

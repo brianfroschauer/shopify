@@ -10,7 +10,7 @@ import java.util.Set;
 
 /**
  * Author: brianfroschauer
- * Date: 2019-05-20
+ * Date: 2019-05-24
  */
 @Data
 @NoArgsConstructor
@@ -22,11 +22,11 @@ public class Catalog {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "date_created")
-    private LocalDate dateCreated = LocalDate.now();
+    @Column(name = "created_date")
+    private LocalDate createdDate = LocalDate.now();
 
-    @Column(name = "date_updated")
-    private LocalDate dateUpdated = LocalDate.now();
+    @Column(name = "updated_date")
+    private LocalDate updatedDate = LocalDate.now();
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "catalog_id")
@@ -34,11 +34,10 @@ public class Catalog {
 
     public void addItem(CatalogItem catalogItem) {
         items.add(catalogItem);
-        dateUpdated = LocalDate.now();
+        updatedDate = LocalDate.now();
     }
 
-    public void removeItem(CatalogItem catalogItem) {
-        items.remove(catalogItem);
-        dateUpdated = LocalDate.now();
+    public int size() {
+        return items.size();
     }
 }
