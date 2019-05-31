@@ -19,7 +19,8 @@ public class CartItem {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "catalog_item")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "catalog_item_id")
     private CatalogItem catalogItem;
 
     @Column(name = "quantity")
