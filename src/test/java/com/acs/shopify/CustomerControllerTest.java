@@ -37,7 +37,7 @@ public class CustomerControllerTest {
     private ResponseCustomer customer;
 
     @Before
-    public void givenRegisteredUser() throws Exception {
+    public void givenRegisteredCustomer() throws Exception {
 
         Map<String, String> map = new HashMap<>();
         map.put("firstName", "John");
@@ -131,9 +131,8 @@ public class CustomerControllerTest {
         assertEquals("Jane", mapped.getFirstName());
     }
 
-
     @Test
-    public void test006_whenDeleteThenReturnNoContentStatus() throws Exception {
+    public void test005_whenDeleteThenReturnNoContentStatus() throws Exception {
 
         Map<String, String> map = new HashMap<>();
         map.put("firstName", "Jane");
@@ -159,7 +158,6 @@ public class CustomerControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
-
 
     @After
     public void tearDown() throws Exception {
