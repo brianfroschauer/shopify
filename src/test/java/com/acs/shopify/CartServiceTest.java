@@ -24,10 +24,13 @@ public class CartServiceTest {
 
     @Test
     public void test001_cuandoSeCreaCarritoDebeEstarVacio() {
+
         Cart cart = new Cart();
 
         cart = cartService.save(cart);
 
         assertNotNull(cart);
+
+        assertEquals(0, cart.size());
     }
 }

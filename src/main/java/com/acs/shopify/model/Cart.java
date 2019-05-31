@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -29,5 +30,9 @@ public class Cart {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id")
-    private Set<CartItem> cartItems;
+    private Set<CartItem> cartItems = new HashSet<>();
+
+    public int size() {
+        return cartItems.size();
+    }
 }
