@@ -1,4 +1,4 @@
-package com.acs.shopify.model;
+package com.acs.shopify.util;
 
 /**
  * Author: brianfroschauer

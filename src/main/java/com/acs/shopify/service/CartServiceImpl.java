@@ -1,6 +1,6 @@
 package com.acs.shopify.service;
 
-import com.acs.shopify.model.Callback;
+import com.acs.shopify.util.Callback;
 import com.acs.shopify.model.Cart;
 import com.acs.shopify.model.CartItem;
 import com.acs.shopify.model.CatalogItem;
