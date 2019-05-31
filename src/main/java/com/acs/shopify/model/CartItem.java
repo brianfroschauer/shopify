@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Author: brianfroschauer
@@ -24,5 +25,24 @@ public class CartItem {
     private CatalogItem catalogItem;
 
     @Column(name = "quantity")
-    private Integer quantity;
+    private int quantity;
+
+    public CartItem(CatalogItem catalogItem) {
+        this.catalogItem = catalogItem;
+        this.quantity = 1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CartItem cartItem = (CartItem) o;
+        return Objects.equals(getCatalogItem(), cartItem.getCatalogItem()) &&
+                Objects.equals(getQuantity(), cartItem.getQuantity());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCatalogItem(), getQuantity());
+    }
 }
