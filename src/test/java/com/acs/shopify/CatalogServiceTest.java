@@ -34,7 +34,7 @@ public class CatalogServiceTest {
     private ProductRepository productRepository;
 
     @Test
-    public void cuandoCreoUnCatalogoEsteNoDebeContenerItems() {
+    public void test001_cuandoSeCreaUnCatalogoDebeEstarVacio() {
 
         Catalog catalog = new Catalog();
 
@@ -46,7 +46,7 @@ public class CatalogServiceTest {
     }
 
     @Test
-    public void cuandoAgregoUnProductoAlCatalogoDeberiaDevolvermeElCatalogItemCreado() {
+    public void cuandoSeAgregaUnProductoAlCatalogoDebeDevolverElCatalogoActualizado() {
 
         Catalog catalog = new Catalog();
 
@@ -62,7 +62,7 @@ public class CatalogServiceTest {
     }
 
     @Test
-    public void cuandoAgregoElMismoProductoDosVecesNoDeberiaAgregarDosProductosAlCatalogo() {
+    public void cuandoSeAgregaElMismoProductoAlCatalogoNoSeDebenRealizarModificaciones() {
 
         Catalog catalog = new Catalog();
 
@@ -76,7 +76,7 @@ public class CatalogServiceTest {
     }
 
     @Test
-    public void cuandoAgregoDosProductosDistintosElSizeDelCatalogoDebeSer2() {
+    public void cuandoSeAgreganDosProductosAlCatalogoElSizeDebeSerDos() {
 
         Catalog catalog = new Catalog();
 
@@ -92,7 +92,7 @@ public class CatalogServiceTest {
     }
 
     @Test
-    public void cuandoAgregoElMismoProductoConOtroPrecioElProductoDebeSerActualizado() {
+    public void cuandoSeAgregaElMismoProductoConUnNuevoPrecioDebeSerActualizado() {
 
         Catalog catalog = new Catalog();
 
@@ -106,7 +106,7 @@ public class CatalogServiceTest {
     }
 
     @Test
-    public void cuandoAgregoDosProductosDiferentesConLasMismasCaracteristicasElProductoOriginalDebeSerActualizado() {
+    public void cuandoSeAgreganDosProductosDiferentesConLasMismasCaracteristicasDebeActualizarElProductoOriginal() {
 
         Catalog catalog = new Catalog();
 
@@ -124,7 +124,7 @@ public class CatalogServiceTest {
     }
 
     @Test
-    public void cuandoEliminoUnProductoSeDebeEliminar() {
+    public void cuandoSeEliminaUnProductoDelCatalogoDebeDevolverElCatalogoSinElProducto() {
 
         Catalog catalog = new Catalog();
 
