@@ -26,10 +26,10 @@ import java.util.List;
 public class CartServiceTest {
 
     @Autowired
-    private CartServiceImpl cartService;
+    private CartServiceMemoryImpl cartService;
 
     @Autowired
-    private CatalogService catalogService;
+    private CatalogServiceMemoryImpl catalogService;
 
     @Autowired
     private CustomerService customerService;

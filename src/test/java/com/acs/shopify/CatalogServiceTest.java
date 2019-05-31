@@ -6,6 +6,7 @@ import com.acs.shopify.model.Product;
 import com.acs.shopify.repository.CatalogRepository;
 import com.acs.shopify.repository.ProductRepository;
 import com.acs.shopify.service.CatalogService;
+import com.acs.shopify.service.CatalogServiceMemoryImpl;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class CatalogServiceTest {
 
     @Autowired
-    private CatalogService catalogService;
+    private CatalogServiceMemoryImpl catalogService;
 
     @Autowired
     private CatalogRepository catalogRepository;
@@ -55,8 +56,6 @@ public class CatalogServiceTest {
         catalog = catalogService.addProduct(catalog, product, 1000F);
 
         assertNotNull(catalog);
-
-        assertNotNull(catalog.getId());
 
         assertEquals(1, catalog.size());
     }
