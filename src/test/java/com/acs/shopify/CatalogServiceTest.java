@@ -3,8 +3,10 @@ package com.acs.shopify;
 import com.acs.shopify.model.Catalog;
 import com.acs.shopify.model.CatalogItem;
 import com.acs.shopify.model.Product;
+import com.acs.shopify.repository.CatalogRepository;
 import com.acs.shopify.repository.ProductRepository;
 import com.acs.shopify.service.CatalogService;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
@@ -24,6 +26,9 @@ public class CatalogServiceTest {
 
     @Autowired
     private CatalogService catalogService;
+
+    @Autowired
+    private CatalogRepository catalogRepository;
 
     @Autowired
     private ProductRepository productRepository;
@@ -136,5 +141,11 @@ public class CatalogServiceTest {
         // pero realmente no se elimina a nivel datos
         assertEquals(0, productRepository.findAll().size());
 
+    }
+
+    @After
+    public void tearDown() {
+        catalogRepository.deleteAll();
+        productRepository.deleteAll();
     }
 }
