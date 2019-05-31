@@ -27,6 +27,7 @@ public class Cart {
     @Column(name = "updated_date")
     private LocalDate updatedDate = LocalDate.now();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id")
     private Set<CartItem> cartItems;
 }

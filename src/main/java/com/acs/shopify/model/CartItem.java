@@ -19,5 +19,9 @@ public class CartItem {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "catalog_item")
+    private CatalogItem catalogItem;
 
+    @Column(name = "quantity")
+    private Integer quantity;
 }
