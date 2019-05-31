@@ -22,8 +22,7 @@ public class RequestCustomer {
     @Size(min = 2, max = 20)
     private String lastName;
 
-    @Size(min = 2, max = 20)
-    @Pattern(regexp = "^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$")
+    @Pattern(regexp = "^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{5,32}$")
     private String username;
 
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")
