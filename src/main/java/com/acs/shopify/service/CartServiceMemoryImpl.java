@@ -4,43 +4,39 @@ import com.acs.shopify.model.Callback;
 import com.acs.shopify.model.Cart;
 import com.acs.shopify.model.CartItem;
 import com.acs.shopify.model.CatalogItem;
-import com.acs.shopify.repository.CartRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Author: brianfroschauer
- * Date: 2019-05-30
+ * Date: 2019-05-31
  */
 @Service
-public class CartServiceImpl implements CartService {
+public class CartServiceMemoryImpl implements CartService {
 
-    private final CartRepository cartRepository;
+    private final Set<Cart> carts;
 
-    @Autowired
-    public CartServiceImpl(CartRepository cartRepository) {
-        this.cartRepository = cartRepository;
+    public CartServiceMemoryImpl() {
+        this.carts = new HashSet<>();
     }
 
     @Override
     public Cart save(Cart cart) {
-
-        return cartRepository.save(cart);
+        carts.add(cart);
+        return cart;
     }
 
     @Override
     public Cart addToCart(Cart cart, CatalogItem catalogItem) {
-
         cart.add(catalogItem);
-
-        return cartRepository.save(cart);
+        return cart;
     }
 
     @Override
     public Cart remove(Cart cart, CartItem cartItem, Callback callback) {
-
         cart.removeItem(cartItem);
-
-        return cartRepository.save(cart);
+        return cart;
     }
 }

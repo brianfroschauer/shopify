@@ -5,9 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Author: brianfroschauer
@@ -33,9 +31,9 @@ public class Cart {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "cart_id")
-    private Set<CartItem> cartItems = new HashSet<>();
+    private List<CartItem> cartItems = new ArrayList<>();
 
     public Cart(Customer customer) {
         this.customer = customer;
@@ -49,11 +47,14 @@ public class Cart {
         final CartItem cartItem = new CartItem(catalogItem);
 
         if (cartItems.contains(cartItem)) {
-            final Iterator<CartItem> iterator = cartItems.iterator();
-            final CartItem next = iterator.next();
-            next.setQuantity(cartItem.getQuantity() + 1);
+            final CartItem item = cartItems.get(cartItems.indexOf(cartItem));
+            item.setQuantity(cartItem.getQuantity() + 1);
         } else {
             cartItems.add(cartItem);
         }
+    }
+
+    public void removeItem(CartItem cartItem) {
+        cartItems.remove(cartItem);
     }
 }

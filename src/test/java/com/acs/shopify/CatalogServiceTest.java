@@ -122,7 +122,7 @@ public class CatalogServiceTest {
     }
 
     @Test
-    public void test_007aCatalogWhenRemovedAProductShouldReturnAnUpdatedCatalogWithoutTheProduct() {
+    public void test007_aCatalogWhenRemovedAProductShouldReturnAnUpdatedCatalogWithoutTheProduct() {
 
         Catalog catalog = new Catalog();
 

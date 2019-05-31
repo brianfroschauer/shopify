@@ -8,5 +8,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Date: 2019-05-24
  */
 public interface CatalogItemRepository extends JpaRepository<CatalogItem, Long> {
-
 }
