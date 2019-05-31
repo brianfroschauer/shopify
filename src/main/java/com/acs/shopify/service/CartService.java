@@ -1,6 +1,7 @@
 package com.acs.shopify.service;
 
 import com.acs.shopify.model.Cart;
+import com.acs.shopify.model.CatalogItem;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,4 +17,12 @@ public interface CartService {
      * @return
      */
     Cart save(Cart cart);
+
+    /**
+     *
+     * @param cart
+     * @param catalogItem
+     * @return
+     */
+    Cart addToCart(Cart cart, CatalogItem catalogItem);
 }
