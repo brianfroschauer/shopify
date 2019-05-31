@@ -28,12 +28,17 @@ public class Catalog {
     @Column(name = "updated_date")
     private LocalDate updatedDate = LocalDate.now();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "catalog_id")
     private Set<CatalogItem> items = new HashSet<>();
 
     public void addItem(CatalogItem catalogItem) {
         items.add(catalogItem);
+        updatedDate = LocalDate.now();
+    }
+
+    public void removeItem(CatalogItem catalogItem) {
+        items.remove(catalogItem);
         updatedDate = LocalDate.now();
     }
 

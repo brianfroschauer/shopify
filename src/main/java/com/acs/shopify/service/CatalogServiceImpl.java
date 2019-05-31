@@ -29,9 +29,18 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public Catalog addProduct(Catalog catalog, Product product, float price) {
 
-        CatalogItem catalogItem = new CatalogItem(product, price);
+        final CatalogItem catalogItem = new CatalogItem(product, price);
 
         catalog.addItem(catalogItem);
+
+        return catalogRepository.save(catalog);
+    }
+
+    @Override
+    public Catalog removeProduct(Catalog catalog, CatalogItem catalogItem) {
+
+        catalog.removeItem(catalogItem);
+
         return catalogRepository.save(catalog);
     }
 }

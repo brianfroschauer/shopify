@@ -1,7 +1,9 @@
 package com.acs.shopify;
 
 import com.acs.shopify.model.Catalog;
+import com.acs.shopify.model.CatalogItem;
 import com.acs.shopify.model.Product;
+import com.acs.shopify.repository.ProductRepository;
 import com.acs.shopify.service.CatalogService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +24,9 @@ public class CatalogServiceTest {
 
     @Autowired
     private CatalogService catalogService;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Test
     public void cuandoCreoUnCatalogoEsteNoDebeContenerItems() {
@@ -52,7 +57,7 @@ public class CatalogServiceTest {
     }
 
     @Test
-    public void cuandoAgregoDosProductosIgualesNoDeberíaAgregarDosProductosAlCatalogo() {
+    public void cuandoAgregoElMismoProductoDosVecesNoDeberiaAgregarDosProductosAlCatalogo() {
 
         Catalog catalog = new Catalog();
 
@@ -88,13 +93,48 @@ public class CatalogServiceTest {
 
         Product product1 = new Product("iPhone X", "All screen");
 
-        Product product2 = new Product("iPhone X", "All screen");
-
         catalog = catalogService.addProduct(catalog, product1, 1000F);
 
         catalog = catalogService.addProduct(catalog, product1, 800F);
 
+        assertEquals(1, catalog.size());
+    }
+
+    @Test
+    public void cuandoAgregoDosProductosDiferentesConLasMismasCaracteristicasElProductoOriginalDebeSerActualizado() {
+
+        Catalog catalog = new Catalog();
+
+        Product product1 = new Product("iPhone X", "All screen");
+
+        Product product2 = new Product("iPhone X", "All screen");
+
+        catalog = catalogService.addProduct(catalog, product1, 1000F);
+
+        catalog = catalogService.addProduct(catalog, product2, 800F);
 
         assertEquals(1, catalog.size());
+
+        assertEquals(1, productRepository.findAll().size());
+    }
+
+    @Test
+    public void cuandoEliminoUnProductoSeDebeEliminar() {
+
+        Catalog catalog = new Catalog();
+
+        Product product1 = new Product("iPhone X", "All screen");
+
+        catalog = catalogService.addProduct(catalog, product1, 1000F);
+
+        catalog = catalogService.removeProduct(catalog, new CatalogItem(product1, 1000F));
+
+        assertEquals(0, catalog.size());
+
+        // con esto me aseguro que a nivel datos tambien este eliminado, ya que lo que
+        // puede pasar es que se desacople de la entidad (le setea en null el catalogId al catalogItem)
+        // pero realmente no se elimina a nivel datos
+        assertEquals(0, productRepository.findAll().size());
+
     }
 }
