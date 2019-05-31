@@ -5,7 +5,6 @@ import com.acs.shopify.model.CatalogItem;
 import com.acs.shopify.model.Product;
 import com.acs.shopify.repository.CatalogRepository;
 import com.acs.shopify.repository.ProductRepository;
-import com.acs.shopify.service.CatalogService;
 import com.acs.shopify.service.CatalogServiceMemoryImpl;
 import org.junit.After;
 import org.junit.Test;

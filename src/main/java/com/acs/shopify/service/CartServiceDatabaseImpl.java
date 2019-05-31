@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
  * Date: 2019-05-30
  */
 @Service
-public class CartServiceImpl implements CartService {
+public class CartServiceDatabaseImpl implements CartService {
 
     private final CartRepository cartRepository;
 
     @Autowired
-    public CartServiceImpl(CartRepository cartRepository) {
+    public CartServiceDatabaseImpl(CartRepository cartRepository) {
         this.cartRepository = cartRepository;
     }
 

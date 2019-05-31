@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
  * Date: 2019-05-24
  */
 @Service
-public class CatalogServiceImpl implements CatalogService {
+public class CatalogServiceDatabaseImpl implements CatalogService {
 
     private final CatalogRepository catalogRepository;
 
     @Autowired
-    public CatalogServiceImpl(CatalogRepository catalogRepository) {
+    public CatalogServiceDatabaseImpl(CatalogRepository catalogRepository) {
 
         this.catalogRepository = catalogRepository;
     }

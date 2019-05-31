@@ -31,12 +31,14 @@ public class CartServiceMemoryImpl implements CartService {
     @Override
     public Cart addToCart(Cart cart, CatalogItem catalogItem) {
         cart.add(catalogItem);
+        carts.add(cart);
         return cart;
     }
 
     @Override
     public Cart remove(Cart cart, CartItem cartItem, Callback callback) {
         cart.removeItem(cartItem);
+        carts.add(cart);
         return cart;
     }
 }

@@ -23,29 +23,22 @@ public class CatalogServiceMemoryImpl implements CatalogService {
 
     @Override
     public Catalog save(Catalog catalog) {
-
         catalogList.add(catalog);
-
         return catalog;
     }
 
     @Override
     public Catalog addProduct(Catalog catalog, Product product, float price) {
-
         final CatalogItem catalogItem = new CatalogItem(product, price);
-
         catalog.addItem(catalogItem);
-
         catalogList.add(catalog);
-
         return catalog;
     }
 
     @Override
     public Catalog removeProduct(Catalog catalog, CatalogItem catalogItem) {
-
         catalog.removeItem(catalogItem);
-
+        catalogList.add(catalog);
         return catalog;
     }
 }
