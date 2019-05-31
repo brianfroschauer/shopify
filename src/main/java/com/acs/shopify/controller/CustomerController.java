@@ -28,13 +28,13 @@ public class CustomerController {
 
     @Autowired
     private CustomerController(CustomerService customerService) {
+
         this.customerService = customerService;
         this.mapper = new ModelMapper();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseCustomer> getOne(
-            @PathVariable Long id) {
+    public ResponseEntity<ResponseCustomer> getOne(@PathVariable Long id) {
 
         final Customer one = customerService.findOne(id);
 
@@ -46,7 +46,6 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<List<ResponseCustomer>> getAll() {
-
         final List<ResponseCustomer> all = customerService.findAll().stream()
                 .map(customer -> mapper.map(customer, ResponseCustomer.class))
                 .collect(Collectors.toList());
@@ -55,11 +54,9 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseCustomer> save(
-            @RequestBody @Valid RequestCustomer requestCustomer) {
+    public ResponseEntity<ResponseCustomer> save(@RequestBody @Valid RequestCustomer requestCustomer) {
 
         final Customer customer = mapper.map(requestCustomer, Customer.class);
-
         final Customer saved = customerService.save(customer);
 
         final URI location = ServletUriComponentsBuilder
@@ -73,12 +70,10 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseCustomer> update(
-            @PathVariable Long id,
-            @RequestBody @Valid RequestCustomer requestCustomer) {
+    public ResponseEntity<ResponseCustomer> update(@PathVariable Long id,
+                                                   @RequestBody @Valid RequestCustomer requestCustomer) {
 
         final Customer customer = mapper.map(requestCustomer, Customer.class);
-
         final Customer updated = customerService.update(id, customer);
 
         final ResponseCustomer responseCustomer = mapper
@@ -89,8 +84,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseCustomer> delete(
-            @PathVariable Long id) {
+    public ResponseEntity<ResponseCustomer> delete(@PathVariable Long id) {
 
         customerService.delete(id);
 
