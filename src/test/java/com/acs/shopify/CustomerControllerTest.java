@@ -1,6 +1,7 @@
 package com.acs.shopify;
 
 import com.acs.shopify.dto.customer.ResponseCustomer;
+import com.acs.shopify.repository.CustomerRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
@@ -33,6 +34,9 @@ public class CustomerControllerTest {
 
     @Autowired
     protected MockMvc mockMvc;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     private ResponseCustomer customer;
 
@@ -160,9 +164,8 @@ public class CustomerControllerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
 
-        mockMvc.perform(delete("/customers/{id}", customer.getId())
-                .contentType(MediaType.APPLICATION_JSON));
+        customerRepository.deleteAll();
     }
 }

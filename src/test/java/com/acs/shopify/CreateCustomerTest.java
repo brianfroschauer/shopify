@@ -1,6 +1,8 @@
 package com.acs.shopify;
 
+import com.acs.shopify.repository.CustomerRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class CreateCustomerTest {
 
     @Autowired
     protected MockMvc mockMvc;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Test
     public void test001_aValidCustomerWhenCreateShouldReturnCreatedStatus() throws Exception {
@@ -152,5 +157,10 @@ public class CreateCustomerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody))
                 .andExpect(status().isBadRequest());
+    }
+
+    @After
+    public void tearDown() {
+        customerRepository.deleteAll();
     }
 }

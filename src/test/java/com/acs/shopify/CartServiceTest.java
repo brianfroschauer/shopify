@@ -25,7 +25,6 @@ import java.util.List;
 @AutoConfigureMockMvc
 public class CartServiceTest {
 
-    // Repository
     @Autowired
     private CustomerRepository customerRepository;
 
@@ -35,23 +34,16 @@ public class CartServiceTest {
     @Autowired
     private CartRepository cartRepository;
 
-    // Services
     @Autowired
     private CustomerService customerService;
 
     @Autowired
-    private CartService cartService;
+    private CartServiceDatabaseImpl cartService;
 
     @Autowired
-    private CatalogService catalogService;
+    private CatalogServiceDatabaseImpl catalogService;
 
-    // Customer
     private Customer customer;
-
-    CartServiceTest(CartService cartService, CatalogService catalogService) {
-        this.cartService = cartService;
-        this.catalogService = catalogService;
-    }
 
     @Before
     public void setup() {
