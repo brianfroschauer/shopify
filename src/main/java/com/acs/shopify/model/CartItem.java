@@ -45,4 +45,28 @@ public class CartItem {
     public int hashCode() {
         return Objects.hash(getCatalogItem(), getQuantity());
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public CatalogItem getCatalogItem() {
+        return catalogItem;
+    }
+
+    public void setCatalogItem(CatalogItem catalogItem) {
+        this.catalogItem = catalogItem;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }
