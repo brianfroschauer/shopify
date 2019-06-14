@@ -6,7 +6,7 @@ jobs:
 
     docker:
       - image: circleci/openjdk:8-jdk-browsers
-      - image: circleci/mysql:8.3
+      - image: circleci/mysql:5.7
         environment:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: db_shopify
