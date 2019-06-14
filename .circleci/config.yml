@@ -1,37 +1,28 @@
 version: 2
 jobs:
   build:
-    docker:
-
-      - image: circleci/openjdk:8-jdk
 
     working_directory: ~/shopify
 
-    environment:
-      MYSQL_HOST: 127.0.0.1
-        MYSQL_DB: db_shopify
-        MYSQL_USER: root
-        MYSQL_PASSWORD: root
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+      - image: circleci/mysql:8.3
+        environment:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: db_shopify
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
 
     steps:
-      - checkout
-      - sudo apt install -y mysql-client
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
-            - v1-dependencies-
+      - checkout
 
       - run: mvn dependency:go-offline
 
       - run:
-          name: Mysql database
-          command: mysql  -h 127.0.0.1 -u root -p root "create database db_shopify;"
+          name: Install MySQL CLI; Import dummy data; run an example query
+          command: |
+            sudo apt-get install mysql-client
+            mysql -h 127.0.0.1 -u root -p root db_shopify
 
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
-
-      # run tests!
-      - run: mvn integration-test
+      - run: mvn package
