@@ -42,10 +42,10 @@ public class CartServiceTest {
     private CustomerService customerService;
 
     @Autowired
-    private CartServiceDatabaseImpl cartService;
+    private CartServiceMemoryImpl cartService;
 
     @Autowired
-    private CatalogServiceDatabaseImpl catalogService;
+    private CatalogServiceMemoryImpl catalogService;
 
     private Customer customer;
 
