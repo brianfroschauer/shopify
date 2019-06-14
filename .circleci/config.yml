@@ -21,9 +21,15 @@ jobs:
       - restore_cache:
           keys:
             - shopify-{{ checksum "pom.xml" }}
-            - shopify-
 
       - run: mvn dependency:go-offline
 
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: shopify-{{ checksum "pom.xml" }}
+
+      - run: mvn package
+
       # run tests!
-      - run: mvn integration-test
+      # run: mvn integration-test
