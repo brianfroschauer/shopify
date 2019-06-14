@@ -8,10 +8,11 @@ jobs:
       - image: circleci/openjdk:8-jdk-browsers
       - image: circleci/mysql:5.7
         environment:
-          MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: db_shopify
           MYSQL_USER: root
           MYSQL_PASSWORD: root
+        ports:
+          - 3306:3306
 
     steps:
 
