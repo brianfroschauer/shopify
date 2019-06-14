@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/customers")
+@CrossOrigin(allowedHeaders = "", origins = "")
 public class CustomerController {
 
     private final CustomerService customerService;
